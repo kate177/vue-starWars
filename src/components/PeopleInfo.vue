@@ -1,14 +1,13 @@
 <template>
-
    <div class="feature" v-for="value in stock" :key="value.stock">
    
-      <div class="feature__img"><img src="../assets/img/Tatoooinefull.jpg"></div>
+      <div class="feature__img"><img src="../assets/img/Luke-rotjpromo.jpg"></div>
       <div class="feature__info">
-         <h2 class="feature__title">{{value.name}} </h2>
+         <h2 class="feature__title">{{value.name}}</h2>
          <ul class="feature__list">
-            <li class="feature-info__list">Diametr: {{value.diameter}}</li>
-            <li class="feature-info__list">Population: {{value.population}}</li>
-            <li class="feature-info__list">Rotation Period: {{value.rotation_period}}</li>
+            <li class="feature-info__list">Gender: {{value.gender}}</li>
+            <li class="feature-info__list">Birth year: {{value.birth_year}}</li>
+            <li class="feature-info__list">Eye color: {{value.eye_color}}</li>
          </ul>
       </div>
    </div>
@@ -25,7 +24,7 @@ export default {
       }
    },
    created() {
-      axios.get('https://swapi.dev/api/planets')
+      axios.get('https://swapi.dev/api/people')
       .then(responce => {
          this.stock = responce.data.results
          console.log(this.stock)
@@ -36,6 +35,3 @@ export default {
    },
 }
 </script>
-
-
-
