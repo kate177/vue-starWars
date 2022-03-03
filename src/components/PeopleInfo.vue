@@ -21,17 +21,23 @@ export default {
       return {
          stock: [],
          errors: [],
+
       }
    },
    created() {
       axios.get('https://swapi.dev/api/people')
       .then(responce => {
          this.stock = responce.data.results
-         console.log(this.stock)
+         console.log(this.stock[0])
       })
       .catch(e => {
          this.errors.push(e)
       })
    },
+   computed: {
+   destinationId () {
+      return parseInt(this.$route.params.id)
+   },
+   }
 }
 </script>

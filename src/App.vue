@@ -70,6 +70,9 @@ export default {
       font-weight: 700;
    }
 }
+.active-link{
+   text-decoration: underline;
+}
 @media screen and (max-width: 1200px) {
    .wrapper{
    width: 930px

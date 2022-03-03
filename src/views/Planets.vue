@@ -2,7 +2,7 @@
    <section class="people-card">
    <div class="people-card__list">
       <ul class="people-card__name" v-for="value in stock" :key="value.stock">
-      <li @click="$router.push({name: 'planetCard'})">{{value.name}}</li>
+      <li><router-link :to="{name: 'planetsInfo', params: {id: i++}}">{{value.name}}</router-link></li>
       </ul>
    </div>
    <router-view />
@@ -18,6 +18,7 @@ export default {
       return {
          stock: [],
          errors: [],
+          i: 0
       }
    },
    created() {

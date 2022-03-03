@@ -34,6 +34,11 @@ export default {
          this.errors.push(e)
       })
    },
+      computed: {
+   destinationId () {
+      return parseInt(this.$route.params.id)
+   },
+   }
 }
 </script>
 

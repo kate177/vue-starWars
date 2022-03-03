@@ -2,65 +2,18 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 
 
 const routes = [
-   {
-      path: '/people',
-      name: 'people',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ '../views/People.vue'),
-      children: [
-         {
-            path: '/peopleInfo',
-            name: 'peopleInfo',
-            // route level code-splitting
-            // this generates a separate chunk (about.[hash].js) for this route
-            // which is lazy-loaded when the route is visited.
-            component: () => import(/* webpackChunkName: "about" */ '../views/Info.vue'),
-         },
-      ]
-   },
-   {
-      path: '/planets',
-      name: 'planets',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ '../views/Planets.vue'),
-      children: [
-         {
-            path: '/planetsCard',
-            name: 'planetCard',
-            // route level code-splitting
-            // this generates a separate chunk (about.[hash].js) for this route
-            // which is lazy-loaded when the route is visited.
-            component: () => import(/* webpackChunkName: "about" */ '../views/PlanetsInfo.vue'),
-         },
-      ]
-   },
-   {
-      path: '/starships',
-      name: 'starships',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ '../views/Starships.vue'),
-      children: [
-         {
-            path: '/starshipsCard',
-            name: 'starshipsCard',
-            // route level code-splitting
-            // this generates a separate chunk (about.[hash].js) for this route
-            // which is lazy-loaded when the route is visited.
-            component: () => import(/* webpackChunkName: "about" */ '../views/StarshipsInfo.vue'),
-         },
-      ]
-   },
+   { path: '/people', name: 'people', component: () => import('../views/People.vue') },
+   { path: '/planets', name: 'planets', component: () => import('../views/Planets.vue') },
+   { path: '/starships', name: 'starships', component: () => import('../views/Starships.vue') },
+   { path: '/people/:id', name: 'peopleInfo', component: () => import('../views/Info.vue') },
+   { path: '/planets/:id', name: 'planetsInfo', component: () => import('../views/PlanetsInfo.vue') },
+   { path: '/starships/:id', name: 'starshipsInfo', component: () => import('../views/StarshipsInfo.vue') },
 ]
 
 const router = createRouter({
    history: createWebHashHistory(),
-   routes
+   routes,
+   linkActiveClass: 'active-link'
 })
 
 export default router
