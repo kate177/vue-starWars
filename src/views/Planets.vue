@@ -2,7 +2,7 @@
    <section class="people-card">
    <div class="people-card__list">
       <ul class="people-card__name" v-for="value in stock" :key="value.stock">
-      <li><router-link :to="{name: 'planetsInfo', params: {id: i++}}">{{value.name}}</router-link></li>
+      <li><router-link class="people-card__info" :to="{name: 'planetsInfo', params: {id: i++}}">{{value.name}}</router-link></li>
       </ul>
    </div>
    <router-view />
@@ -54,6 +54,9 @@ export default {
       &__name li:hover{
       cursor: pointer;
       background-color: #3F3F3F;
+   }
+      &__info {
+      color: #fff;
    }
 }
 .feature{

@@ -2,10 +2,10 @@
    <section class="people-card">
    <div class="people-card__list">
       <ul class="people-card__name" v-for="value in stock" :key="value.stock">
-       <li><router-link :to="{name: 'peopleInfo', params: {id: i++}}">{{value.name}}</router-link></li>
+       <li><router-link class="people-card__info" :to="{name: 'peopleInfo', params: {id: i++}}">{{value.name}}</router-link></li>
       </ul>
    </div>
-    <router-view />
+    <router-view/>
    </section>
 </template>
 
@@ -17,7 +17,7 @@ export default {
       return {
          stock: [],
          errors: [],
-         i: 0
+         i: 1
       }
    },
    created() {
