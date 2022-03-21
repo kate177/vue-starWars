@@ -1,35 +1,38 @@
 <template>
    <section class="people-card">
    <div class="people-card__list">
-      <ul class="people-card__name" v-for="value in stock" :key="value.stock">
-      <li><router-link class="people-card__info" :to="{name: 'starshipsInfo', params: {id: i++}}">{{value.name}}</router-link></li>
-      </ul>
+            <ul class="people-card__name">
+          <li class="people-card__info" v-for="(value, idx) in starship" :key="value.name" @click="onclickPerson(idx)"> {{value.name}}</li>        
+         </ul>
    </div>
-<router-view />
+   <StarshipsCard :starshipInf="starshipInf" :id="id" v-if="starshipInf"/>
    </section>
 </template>
 
 <script>
-import axios from 'axios'
+import { starshipsService } from '@/services/starships.js';
+import StarshipsCard from "../components/StarshipsCard.vue";
+
 export default {
-   name: 'Stocks',
+   
    data() {
-      return {
-         stock: [],
-         errors: [],
-         i: 0
-      }
+      return { starship: [], starshipInf: null, id:0 }
    },
-   created() {
-      axios.get('https://swapi.dev/api/starships')
-      .then(responce => {
-         this.stock = responce.data.results
-         console.log(this.stock)
-      })
-      .catch(e => {
-         this.errors.push(e)
-      })
-   },
+   components: {
+    StarshipsCard,
+  },
+  methods:{
+     onclickPerson(idx) {
+        this.starshipInf = this.starship[idx];
+        this.id = idx;
+     }
+  },
+   async created() {
+      const response = await starshipsService().getStarships();
+      console.log(response);
+      this.starship = response.results;
+      this.starshipInf = response.results[0];
+   }
 }
 </script>
 
@@ -61,6 +64,7 @@ export default {
 .feature{
    display: flex;
    width:45%;
+   height: 35%;
    padding: 16px;
    border-radius: 5px;
    background-color: #303030;

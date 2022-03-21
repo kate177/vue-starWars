@@ -1,36 +1,51 @@
 <template>
    <section class="people-card">
+   <Loader v-if="loading"/>
    <div class="people-card__list">
-      <ul class="people-card__name" v-for="value in stock" :key="value.stock">
-       <li><router-link class="people-card__info" :to="{name: 'peopleInfo', params: {id: i++}}">{{value.name}}</router-link></li>
-      </ul>
+         <ul class="people-card__name">
+         <li class="people-card__info" v-for="(value, idx) in people" :key="value.name" @click="onclickPerson(idx)"> {{value.name}}</li>         
+         </ul>
    </div>
-    <router-view/>
+   <PeopleInfo :person="person" :id="id" v-if="person"/>
+   
    </section>
 </template>
 
 <script>
-import axios from 'axios'
+import { peopleService } from '@/services/people.js';
+import Loader from '@/components/Loader.vue';
+import PeopleInfo from "../components/PeopleInfo.vue";
+
 export default {
-   name: 'Stocks',
+   
    data() {
-      return {
-         stock: [],
-         errors: [],
-         i: 1
+      return { people: [], person: null, id:0}
+   },
+   components: {
+    Loader,
+    PeopleInfo,
+  },
+  methods:{
+     onclickPerson(idx) {
+        this.person = this.people[idx];
+        this.id = idx;
+     }
+  },
+   async created() {
+      try{
+      this.loading = true;
+      const response = await peopleService().getPeople();
+      console.log(response);
+      this.loading = false;
+      this.people = response.results;
+      this.person = response.results[0];
+      this.$emit('imgUser', this.id);
       }
-   },
-   created() {
-      axios.get('https://swapi.dev/api/people')
-      .then(responce => {
-         this.stock = responce.data.results
-         console.log(this.stock)
-      })
-      .catch(e => {
-         this.errors.push(e)
-      })
-   },
-}
+      catch(e) {
+         console.log(error)
+      }
+   }
+   }
 </script>
 
 <style lang="scss">
@@ -45,19 +60,16 @@ export default {
      height:30%;
   }
   &__name li{
+   display: block;
    padding: 17px 15px;
    border: 1px solid #444;
    border-radius: 5px;
    font-size: 16px;
    color: #fff;
-   
    }
    &__name li:hover{
       cursor: pointer;
       background-color: #3F3F3F;
-   }
-   &__info {
-      color: #fff;
    }
 }
 .feature{

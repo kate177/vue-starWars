@@ -1,9 +1,9 @@
 <template>
    <section class="people-card">
    <div class="people-card__list">
-      <ul class="people-card__name" v-for="value in stock" :key="value.stock">
-      <li><router-link class="people-card__info" :to="{name: 'planetsInfo', params: {id: i++}}">{{value.name}}</router-link></li>
-      </ul>
+      <ul class="people-card__name">
+         <li class="people-card__info" v-for="(value, idx) in planets" :key="value.name" @click="$router.push({name: 'planetsInfo', params: { id: idx + 1 }})"> {{value.name}}</li>         
+         </ul>
    </div>
    <router-view />
    </section>
@@ -11,27 +11,20 @@
 
 
 <script>
-import axios from 'axios'
+import { planetsService } from '@/services/planets.js';
+
 export default {
-   name: 'Stocks',
+   
    data() {
-      return {
-         stock: [],
-         errors: [],
-          i: 0
-      }
+      return { planets: [] }
    },
-   created() {
-      axios.get('https://swapi.dev/api/planets')
-      .then(responce => {
-         this.stock = responce.data.results
-         console.log(this.stock)
-      })
-      .catch(e => {
-         this.errors.push(e)
-      })
-   },
-}
+   async created() {
+      const response = await planetsService().getPlanets();
+      console.log(response);
+      this.planets = response.results;
+      console.log(this.planets);
+   }
+   }
 </script>
 
 <style lang="scss">
@@ -62,6 +55,7 @@ export default {
 .feature{
    display: flex;
    width:45%;
+   height: 30%;
    padding: 16px;
    border-radius: 5px;
    background-color: #303030;

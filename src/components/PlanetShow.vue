@@ -2,15 +2,54 @@
 <section class="planet">
 <div class="planet__img"><img src="../assets/img/UtapauRotS.png"></div>
 <div class="planet__info">
-<h2 class="planet__title">Utapau</h2>
+<h2 class="planet__title">{{planetShow.name}}</h2>
 <ul class="planet-list">
-<li class="planet-info__list">Population: 95000000</li>
-<li class="planet-info__list">Rotation period: 27</li>
-<li class="planet-info__list">Diameter 12900</li>
+<li class="planet-info__list">Population: {{planetShow.population}}</li>
+<li class="planet-info__list">Rotation period: {{planetShow.rotation_period}}</li>
+<li class="planet-info__list">Diameter: {{planetShow.diameter}}</li>
 </ul>
 </div>
 </section>
 </template>
+
+<script>
+import { planetsService } from '@/services/planets.js';
+import axios from "axios";
+export default {
+   data() {
+      return {
+         planetShow: [],
+         homeplanet: [],
+      }
+   },
+   props:{
+      planet: Object,
+   },
+     async created () {
+      const response = await planetsService().getPlanets();
+       console.log(response);
+       this.planetShow = response.results[0];
+       this.interval = setInterval(() => {
+        const rand = 0 + Math.random() * 10
+        this.randomIndex = Math.floor(rand)
+        this.planetShow = response.results[this.randomIndex]
+        }, 10000);
+      },
+      watch: {
+         planet: function () {
+            clearTimeout(this.interval);
+            console.log(this.planet);
+            axios.get(this.planet).then(response => {this.planetShow = response.data;})
+            console.log(this.planetShow);
+            // const redf = [this.planet];
+            // console.log(redf);
+            //this.planetShow = redf.results.data;
+            //console.log(this.planetShow);
+
+         }
+      }
+}
+</script>
 
 <style lang="scss">
 .planet{
