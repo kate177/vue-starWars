@@ -14,6 +14,7 @@
 
 <script>
 import { planetsService } from '@/services/planets.js';
+import {planetsImgService } from '@/services/imageService.js';
 import axios from "axios";
 export default {
    data() {
@@ -41,11 +42,6 @@ export default {
             console.log(this.planet);
             axios.get(this.planet).then(response => {this.planetShow = response.data;})
             console.log(this.planetShow);
-            // const redf = [this.planet];
-            // console.log(redf);
-            //this.planetShow = redf.results.data;
-            //console.log(this.planetShow);
-
          }
       }
 }
