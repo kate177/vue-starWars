@@ -23,7 +23,7 @@ const routes = [
       component: () => import('../views/Planets.vue')
    },
    {
-      path: '/:id',
+      path: '/planets/:id',
       name: 'planetsInfo',
       component: () => import('../views/PlanetsInfo.vue')
    },
@@ -33,7 +33,7 @@ const routes = [
       component: () => import('../views/Starships.vue')
    },
    {
-      path: '/:id',
+      path: '/starships/:id',
       name: 'starshipsInfo',
       component: () => import('../views/StarshipsInfo.vue')
    },

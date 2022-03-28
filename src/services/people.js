@@ -1,4 +1,4 @@
-import { initHttpModule } from '@/http';
+import { initHttpModule } from '@/http/index.js';
 
 
 export function peopleService() {

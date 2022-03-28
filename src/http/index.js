@@ -12,16 +12,3 @@ export function initHttpModule() {
    return http;
 }
 
-export function initHttpImage() {
-   const imageAPI = axios.create({
-      basURL: window.settings.imgUrl
-   });
-
-   imageAPI.interceptors.response.use((conf) => {
-      return conf.data;
-   });
-
-   return imageAPI;
-}
-
-

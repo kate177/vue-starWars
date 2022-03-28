@@ -1,30 +1,47 @@
 <template>
    <section class="people-card">
-   <div class="people-card__list">
-      <ul class="people-card__name">
-         <li class="people-card__info" v-for="(value, idx) in planets" :key="value.name" @click="$router.push({name: 'planetsInfo', params: { id: idx + 1 }})"> {{value.name}}</li>         
+      <Loader v-if="loading"/>
+      <div class="people-card__list">
+         <ul class="people-card__name">
+         <li class="people-card__info" v-for="(value, idx) in planets" :key="value.name" @click="onclickPlanet(idx)"> {{value.name}}</li>         
          </ul>
    </div>
-   <router-view />
+     <PlanetsCard :planet="planet" :id="id" v-if="planet"/>
    </section>
 </template>
 
 
 <script>
 import { planetsService } from '@/services/planets.js';
+import PlanetsCard from "../components/PlanetsCard.vue";
+import Loader from '@/components/Loader.vue';
 
 export default {
-   
    data() {
-      return { planets: [] }
+      return { planets: [], planet: null, id: null}
    },
+   components: {
+    PlanetsCard,
+  },
+  methods:{
+     onclickPlanet(idx) {
+        this.planet = this.planets[idx];
+        this.id = idx;
+     }
+  },
    async created() {
+      try{
+      this.loading = true;
       const response = await planetsService().getPlanets();
-      console.log(response);
+      this.loading = false;
       this.planets = response.results;
-      console.log(this.planets);
-   }
-   }
+      this.planet = response.results[0];
+      }
+      catch(e) {
+         console.log(error)
+      }
+   },
+}
 </script>
 
 <style lang="scss">
@@ -61,7 +78,7 @@ export default {
    background-color: #303030;
    &__img{
       width: 180px;
-      height: 250px;
+      height: 210px;
       border-radius: 10px;
       margin-right: 30px;
    }

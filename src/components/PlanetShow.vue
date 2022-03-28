@@ -1,6 +1,6 @@
 <template>
 <section class="planet">
-<div class="planet__img"><img src="../assets/img/UtapauRotS.png"></div>
+<div class="planet__img"><img :src="dataUrl"></div>
 <div class="planet__info">
 <h2 class="planet__title">{{planetShow.name}}</h2>
 <ul class="planet-list">
@@ -14,29 +14,57 @@
 
 <script>
 import { planetsService } from '@/services/planets.js';
-import {planetsImgService } from '@/services/imageService.js';
+import { getImgService } from '@/services/imageService.js';
 import axios from "axios";
 export default {
    data() {
       return {
          planetShow: [],
          homeplanet: [],
+         imagePlanet: null,
+         id: null
       }
    },
    props:{
       planet: Object,
    },
-     async created () {
-      const response = await planetsService().getPlanets();
-       console.log(response);
-       this.planetShow = response.results[0];
-       this.interval = setInterval(() => {
-        const rand = 0 + Math.random() * 10
-        this.randomIndex = Math.floor(rand)
-        this.planetShow = response.results[this.randomIndex]
-        }, 10000);
+     created () {
+         this.fetchData();
+         this.truncate();
+          this.interval = setInterval(() => {
+             this.rondomPlanet();
+         }, 10000);
       },
-      watch: {
+      methods: {
+         async fetchData() {
+            const response = await planetsService().getPlanets();
+            this.planetShow = response.results[0];
+         },
+         async truncate() {
+            try{
+               this.imagePlanet = await getImgService().getPlanetImgById('1');
+            } catch (error) {
+            this.imagePlanet = await getImgService().getPlanetImgByError();
+            }
+         },
+         async rondomPlanet(){ 
+               this.id += 1;
+               if(this.id < 11){
+               const response = await planetsService().getPlanets();
+                this.imagePlanet = await getImgService().getPlanetImgById(this.id);
+               this.planetShow = response.results[this.id - 1];
+               }
+         }
+      },
+      computed : {
+      dataUrl(){
+         return 'data:image/jpeg;base64,' + btoa(
+               new Uint8Array(this.imagePlanet)
+               .reduce((data, byte) => data + String.fromCharCode(byte), '')
+               );
+            }
+         },
+         watch: {
          planet: function () {
             clearTimeout(this.interval);
             console.log(this.planet);

@@ -1,32 +1,25 @@
-import { initHttpImage } from '@/http';
+import { initHttpModuleImg } from '@/http/image.js';
 
 
-export function peopleImgService() {
-   const imageAPI = initHttpImage();
+export function getImgService() {
+   const imageAPI = initHttpModuleImg();
 
-   function getPersonImgById(id) {
-      return imageAPI.get('characters', { params: { id } }, '.jpg');
+   function getPersonImgById(imageId) {
+      return imageAPI.get(`characters/${imageId}.jpg`, { responseType: 'arraybuffer' });
    }
 
-   return { getPersonImgById };
-}
 
-export function planetsImgService() {
-   const imageAPI = initHttpImage();
-
-   function getPlanetImgById(id) {
-      return imageAPI.get('planets', { params: { id } }, '.jpg');
+   function getPlanetImgById(imageId) {
+      return imageAPI.get(`planets/${imageId}.jpg`, { responseType: 'arraybuffer' });
    }
 
-   return { getPlanetImgById };
-}
-
-export function starshipsImgService() {
-   const imageAPI = initHttpImage();
-
-   function getStarshipImgById(id) {
-      return imageAPI.get('starships', { params: { id } }, '.jpg');
+   function getStarshipImgById(imageId) {
+      return imageAPI.get(`starships/${imageId}.jpg`, { responseType: 'arraybuffer' });
    }
 
-   return { getStarshipImgById };
+   function getPlanetImgByError() {
+      return imageAPI.get('big-placeholder.jpg', { responseType: 'arraybuffer' });
+   }
+
+   return { getPersonImgById, getPlanetImgById, getStarshipImgById, getPlanetImgByError };
 }

@@ -1,6 +1,6 @@
 <template>
    <div class="feature" v-if="personInfo">
-      <div class="feature__img"><img src="../assets/img/Luke-rotjpromo.jpg"></div>
+      <div class="feature__img"><img :src="dataUrl"></div>
       <div class="feature__info">
          <h2 class="feature__title">{{personInfo.name}}</h2>
          <ul class="feature__list">
@@ -18,21 +18,30 @@
 
 <script>
 import { peopleService } from '@/services/people.js';
+import { getImgService } from '@/services/imageService.js';
 export default {
    data() {
       return {
          personInfo: [],
-         userID: this.$route.params.id
+         userID: this.$route.params.id,
+         imagePeople: null,
       }
    },
    async created() {
       const response = await peopleService().getPeople();
-      console.log(response);
-      console.log(this.userID);
+      this.imagePeople = await getImgService().getPersonImgById(this.userID);
       this.personInfo = response.results[this.userID];
       this.planetShow = response.results[this.userID].homeworld;
       this.$emit('planetInf', this.planetShow);
    },
+   computed : {
+      dataUrl(){
+         return 'data:image/jpeg;base64,' + btoa(
+            new Uint8Array(this.imagePeople)
+            .reduce((data, byte) => data + String.fromCharCode(byte), '')
+         );
+      }  
+   }
 }
 </script>
 

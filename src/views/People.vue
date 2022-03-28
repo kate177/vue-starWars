@@ -7,7 +7,6 @@
          </ul>
    </div>
    <PeopleInfo :person="person" :id="id" v-if="person"/>
-   
    </section>
 </template>
 
@@ -17,9 +16,8 @@ import Loader from '@/components/Loader.vue';
 import PeopleInfo from "../components/PeopleInfo.vue";
 
 export default {
-   
    data() {
-      return { people: [], person: null, id:0}
+      return { people: [], person: null, id: null}
    },
    components: {
     Loader,
@@ -35,16 +33,14 @@ export default {
       try{
       this.loading = true;
       const response = await peopleService().getPeople();
-      console.log(response);
       this.loading = false;
       this.people = response.results;
       this.person = response.results[0];
-      this.$emit('imgUser', this.id);
       }
       catch(e) {
          console.log(error)
       }
-   }
+   },
    }
 </script>
 

@@ -1,10 +1,9 @@
 <template>
-
-   <div class="feature" v-if="planet">
+   <div class="feature" @click="$router.push({name: 'planetsInfo', params: {id: id}})">
    
-      <div class="feature__img"><img src="../assets/img/Tatoooinefull.jpg"></div>
+      <div class="feature__img"><img :src="dataUrl"></div>
       <div class="feature__info">
-         <h2 class="feature__title">{{planet.name}} </h2>
+         <h2 class="feature__title">{{planet.name}}</h2>
          <ul class="feature__list">
             <li class="feature-info__list">Diametr: {{planet.diameter}}</li>
             <li class="feature-info__list">Population: {{planet.population}}</li>
@@ -15,20 +14,40 @@
 </template>
 
 <script>
-import axios from 'axios'
+import { planetsService } from '@/services/planets.js';
+import { getImgService } from '@/services/imageService.js';
 export default {
    data() {
-         return {planet: []}
+   return {planet: [], imagePlanet: null}
    },
-   watch: {
-         '$route'(to) {
-            axios.get(`https://swapi.dev/api/planets/${to.params.id}`)
-            .then(responce => {
-            this.planet = responce.data
-            console.log(this.planet)
-            })
+   props: {
+      planet: {type: Object, required: true},
+      id: {tupe: Number, required: true},
+   },
+   async created () {
+      try{
+         this.imagePlanet = await getImgService().getPlanetImgById('1');
+         } catch (error) {
+         this.imagePlanet = await getImgService().getPlanetImgByError();
          }
-}
+   },
+   watch: { 
+   id: async function(newVal) {
+      try{
+            this.imagePlanet = await getImgService().getPlanetImgById(newVal + 1);
+            } catch (error) {
+            this.imagePlanet = await getImgService().getPlanetImgByError();
+            }
+      }
+   },
+   computed : {
+      dataUrl(){
+         return 'data:image/jpeg;base64,' + btoa(
+            new Uint8Array(this.imagePlanet)
+            .reduce((data, byte) => data + String.fromCharCode(byte), '')
+         );
+      }  
+   }
 }
 </script>
 

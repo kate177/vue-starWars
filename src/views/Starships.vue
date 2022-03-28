@@ -1,37 +1,45 @@
 <template>
    <section class="people-card">
+   <Loader v-if="loading"/>
    <div class="people-card__list">
-            <ul class="people-card__name">
-          <li class="people-card__info" v-for="(value, idx) in starship" :key="value.name" @click="onclickPerson(idx)"> {{value.name}}</li>        
+         <ul class="people-card__name">
+          <li class="people-card__info" v-for="(value, idx) in starships" :key="value.name" @click="onclickStarships(idx)"> {{value.name}}</li>        
          </ul>
    </div>
-   <StarshipsCard :starshipInf="starshipInf" :id="id" v-if="starshipInf"/>
+   <StarshipsCard :starship="starship" :id="id" v-if="starship"/>
    </section>
 </template>
 
 <script>
 import { starshipsService } from '@/services/starships.js';
 import StarshipsCard from "../components/StarshipsCard.vue";
+import Loader from '@/components/Loader.vue';
 
 export default {
    
    data() {
-      return { starship: [], starshipInf: null, id:0 }
+      return { starships: [], starship: null, id:0 }
    },
    components: {
     StarshipsCard,
   },
   methods:{
-     onclickPerson(idx) {
-        this.starshipInf = this.starship[idx];
+     onclickStarships(idx) {
+        this.starship = this.starships[idx];
         this.id = idx;
      }
   },
    async created() {
-      const response = await starshipsService().getStarships();
-      console.log(response);
-      this.starship = response.results;
-      this.starshipInf = response.results[0];
+      try{
+         this.loading = true;
+         const response = await starshipsService().getStarships();
+         this.loading = false;
+         this.starships = response.results;
+         this.starship = response.results[0];
+      }
+      catch(e) {
+         console.log(error)
+      }
    }
 }
 </script>
