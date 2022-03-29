@@ -1,21 +1,19 @@
-import { initHttpModule } from '@/http/index.js';
-
+import { initHttpModule } from "@/http/index.js";
 
 export function peopleService() {
-   const http = initHttpModule();
+  const http = initHttpModule();
 
-   function getPeople(page = 1) {
-      return http.get('people', {
-         query: { page }
-      });
-   }
+  function getPeople(page = 1) {
+    return http.get("people", {
+      query: { page },
+    });
+  }
 
-   function getPersonById(id) {
-      return http.get('people', {
-         params: { id }
-      });
-   }
+  function getPersonById(id) {
+    return http.get("people", {
+      params: { id },
+    });
+  }
 
-   return { getPeople, getPersonById };
+  return { getPeople, getPersonById };
 }
-

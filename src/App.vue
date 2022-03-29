@@ -1,33 +1,30 @@
 <template>
-<div id="app" class="wrapper">
-   <Navigation/>
-   <PlanetShow :planet="planet" />
-   <router-view @planetInf="planet=$event"></router-view>
-</div>
+  <PageNotFound v-model="isNotFound">
+    <div id="app" class="wrapper">
+      <router-view />
+    </div>
+  </PageNotFound>
 </template>
 
-
 <script>
-import PlanetShow from "./components/PlanetShow.vue";
-import Navigation from "./components/Navigation.vue";
+import PageNotFound from "@/views/404.vue";
 export default {
   components: {
-    PlanetShow,
-    Navigation
+    PageNotFound,
   },
-     data(){
-      return {
-         planet: null,
-      }
-   },
-}
+  data() {
+    return {
+      isNotFound: false,
+    };
+  },
+};
 </script>
 
 <style lang="scss">
-.wrapper{
-   width: 1110px;
-   height: 100%;
-   margin: 0 auto;
-   padding-bottom: 60px;
+.wrapper {
+  width: 1110px;
+  height: 100%;
+  margin: 0 auto;
+  padding-bottom: 60px;
 }
 </style>

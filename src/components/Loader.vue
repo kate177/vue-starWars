@@ -4,10 +4,9 @@
 
 <script>
 export default {
-  name: 'Loader',
+  name: "Loader",
 };
 </script>
-
 
 <style lang="scss">
 .large {
@@ -28,16 +27,20 @@ export default {
 }
 
 .loader {
-  border-top-color: #00644F;
+  border-top-color: #00644f;
   border-right-color: #383838;
-  border-bottom-color: #00644F;
+  border-bottom-color: #00644f;
   border-left-color: #383838;
   border-radius: 50%;
   animation: spin 1s linear infinite;
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 </style>

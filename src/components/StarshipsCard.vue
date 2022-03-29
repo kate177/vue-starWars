@@ -1,54 +1,60 @@
 <template>
-  <div class="feature"  @click="$router.push({name: 'starshipsInfo', params: {id: id}})">
-
-      <div class="feature__imgs"><img :src="dataUrl"></div>
-      <div class="feature__info">
-         <h2 class="feature__title">{{starship.name}}</h2>
-         <ul class="feature__list">
-            <li class="feature-info__list">Model:{{starship.model}}</li>
-            <li class="feature-info__list">Manufacturer:{{starship.manufacturer}}</li>
-            <li class="feature-info__list">Length: {{starship.length}}</li>
-            <li class="feature-info__list">Crew: {{starship.crew}}</li>
-            <li class="feature-info__list">Passengers: {{starship.passengers}}</li>
-         </ul>
-      </div>
-   </div>
+  <div
+    class="feature"
+    @click="$router.push({ name: 'starshipsInfo', params: { id: id } })"
+  >
+    <div class="feature__imgs"><img :src="dataUrl" /></div>
+    <div class="feature__info">
+      <h2 class="feature__title">{{ starship.name }}</h2>
+      <ul class="feature__list">
+        <li class="feature-info__list">Model:{{ starship.model }}</li>
+        <li class="feature-info__list">
+          Manufacturer:{{ starship.manufacturer }}
+        </li>
+        <li class="feature-info__list">Length: {{ starship.length }}</li>
+        <li class="feature-info__list">Crew: {{ starship.crew }}</li>
+        <li class="feature-info__list">
+          Passengers: {{ starship.passengers }}
+        </li>
+      </ul>
+    </div>
+  </div>
 </template>
 
 <script>
-import { starshipsService } from '@/services/starships.js'
-import { getImgService } from '@/services/imageService.js';
+import { starshipsService } from "@/services/starships.js";
+import { getImgService } from "@/services/imageService.js";
+import { Formatter } from "@/helpers/formatter";
 export default {
-   data() {
-   return {starship: [], imageStarship: null}
-   },
-   props: {
-      starship: {type: Object, required: true},
-      id: {tupe: Number, required: true},
-   },
-   async created () {
-      try{
-         this.imageStarship = await getImgService().getStarshipImgById('1');
-         } catch (error) {
-         this.imageStarship = await getImgService().getPlanetImgByError();
-         }
-   },
-   watch: { 
-   id: async function(newVal) {
-      try{
-            this.imageStarship = await getImgService().getStarshipImgById(newVal + 1);
-            } catch (error) {
-            this.imageStarship = await getImgService().getPlanetImgByError();
-            }
+  data() {
+    return { imageStarship: null };
+  },
+  props: {
+    starship: { type: Object, required: true },
+    id: { tupe: Number, required: true },
+  },
+  async created() {
+    try {
+      this.imageStarship = await getImgService().getStarshipImgById("1");
+    } catch (error) {
+      this.imageStarship = await getImgService().getPlanetImgByError();
+    }
+  },
+  watch: {
+    id: async function (newVal) {
+      try {
+        this.imageStarship = await getImgService().getStarshipImgById(
+          newVal + 1
+        );
+      } catch (error) {
+        this.imageStarship = await getImgService().getPlanetImgByError();
       }
-   },
-   computed : {
-      dataUrl(){
-         return 'data:image/jpeg;base64,' + btoa(
-            new Uint8Array(this.imageStarship)
-            .reduce((data, byte) => data + String.fromCharCode(byte), '')
-         );
-      }  
-   }
-}
+    },
+  },
+  computed: {
+    dataUrl() {
+      return Formatter.dataUrl(this.imageStarship);
+    },
+  },
+};
 </script>

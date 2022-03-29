@@ -1,19 +1,19 @@
-import { initHttpModule } from '@/http/index.js';
+import { initHttpModule } from "@/http/index.js";
 
 export function planetsService() {
-   const http = initHttpModule();
+  const http = initHttpModule();
 
-   function getPlanets(page = 1) {
-      return http.get('planets', {
-         query: { page }
-      });
-   }
+  function getPlanets(page = 1) {
+    return http.get("planets", {
+      query: { page },
+    });
+  }
 
-   function getPlanetsnById(id) {
-      return http.get('planets', {
-         params: { id }
-      });
-   }
+  function getPlanetsnById(id) {
+    return http.get("planets", {
+      params: { id },
+    });
+  }
 
-   return { getPlanets, getPlanetsnById };
+  return { getPlanets, getPlanetsnById };
 }
