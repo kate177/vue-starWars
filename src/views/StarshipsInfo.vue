@@ -57,7 +57,7 @@ export default {
       );
       this.starshipsInfo = response.results[this.userID];
     } catch (e) {
-      this.imageStarship = await getImgService().getPlanetImgByError();
+      this.imageStarship = await getImgService().getImgByError();
       const response = await starshipsService().getStarships();
       this.starshipsInfo = response.results[this.userID];
     }

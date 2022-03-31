@@ -1,5 +1,4 @@
 <template>
-  <slot v-if="!modelValue" />
   <div class="wrapper-mistake">
     <div class="wrapper-mistak__inner">
       <h2 class="mistak-inner__subtitle">Not Found</h2>
@@ -8,18 +7,6 @@
     </div>
   </div>
 </template>
-
-<script>
-export default {
-  name: "PageNotFound",
-  props: {
-    modelValue: {
-      type: Boolean,
-      required: true,
-    },
-  },
-};
-</script>
 
 <style lang="scss">
 .wrapper-mistake {

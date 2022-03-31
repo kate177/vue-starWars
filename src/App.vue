@@ -1,24 +1,8 @@
 <template>
-  <PageNotFound v-model="isNotFound">
-    <div id="app" class="wrapper">
-      <router-view />
-    </div>
-  </PageNotFound>
+  <div id="app" class="wrapper">
+    <router-view />
+  </div>
 </template>
-
-<script>
-import PageNotFound from "@/views/404.vue";
-export default {
-  components: {
-    PageNotFound,
-  },
-  data() {
-    return {
-      isNotFound: false,
-    };
-  },
-};
-</script>
 
 <style lang="scss">
 .wrapper {

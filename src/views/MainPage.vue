@@ -1,10 +1,7 @@
 <template>
   <Navigation />
   <PlanetShow :planet="planet" />
-  <router-view
-    @planetInf="planet = $event"
-    @pageNotFound="isNotFound = $event"
-  />
+  <router-view @planetInf="planet = $event" />
 </template>
 
 <script>

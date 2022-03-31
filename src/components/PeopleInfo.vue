@@ -31,7 +31,7 @@ export default {
     try {
       this.imagePeople = await getImgService().getPersonImgById("1");
     } catch (error) {
-      this.imagePeople = await getImgService().getPlanetImgByError();
+      this.imagePeople = await getImgService().getImgByError();
     }
   },
   watch: {
@@ -39,7 +39,7 @@ export default {
       try {
         this.imagePeople = await getImgService().getPersonImgById(newVal + 1);
       } catch (error) {
-        this.imagePeople = await getImgService().getPlanetImgByError();
+        this.imagePeople = await getImgService().getImgByError();
       }
     },
   },

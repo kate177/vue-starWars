@@ -22,22 +22,22 @@
 </template>
 
 <script>
-import { starshipsService } from "@/services/starships.js";
 import { getImgService } from "@/services/imageService.js";
 import { Formatter } from "@/helpers/formatter";
+
 export default {
   data() {
     return { imageStarship: null };
   },
   props: {
     starship: { type: Object, required: true },
-    id: { tupe: Number, required: true },
+    id: { tupe: Number, required: true, default: 0 },
   },
   async created() {
     try {
-      this.imageStarship = await getImgService().getStarshipImgById("1");
+      this.imageStarship = await getImgService().getStarshipImgById(1);
     } catch (error) {
-      this.imageStarship = await getImgService().getPlanetImgByError();
+      this.imageStarship = await getImgService().getImgByError();
     }
   },
   watch: {
@@ -47,7 +47,7 @@ export default {
           newVal + 1
         );
       } catch (error) {
-        this.imageStarship = await getImgService().getPlanetImgByError();
+        this.imageStarship = await getImgService().getImgByError();
       }
     },
   },

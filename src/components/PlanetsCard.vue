@@ -5,12 +5,12 @@
   >
     <div class="feature__img"><img :src="dataUrl" /></div>
     <div class="feature__info">
-      <h2 class="feature__title">{{ planet.name }}</h2>
+      <h2 class="feature__title">{{ sphere.name }}</h2>
       <ul class="feature__list">
-        <li class="feature-info__list">Diametr: {{ planet.diameter }}</li>
-        <li class="feature-info__list">Population: {{ planet.population }}</li>
+        <li class="feature-info__list">Diametr: {{ sphere.diameter }}</li>
+        <li class="feature-info__list">Population: {{ sphere.population }}</li>
         <li class="feature-info__list">
-          Rotation Period: {{ planet.rotation_period }}
+          Rotation Period: {{ sphere.rotation_period }}
         </li>
       </ul>
     </div>
@@ -18,22 +18,22 @@
 </template>
 
 <script>
-import { planetsService } from "@/services/planets.js";
 import { getImgService } from "@/services/imageService.js";
 import { Formatter } from "@/helpers/formatter";
+
 export default {
   data() {
-    return { planet: [], imagePlanet: null };
+    return { imagePlanet: null };
   },
   props: {
-    planet: { type: Object, required: true },
+    sphere: { type: Object, required: true },
     id: { tupe: Number, required: true },
   },
   async created() {
     try {
-      this.imagePlanet = await getImgService().getPlanetImgById("1");
+      this.imagePlanet = await getImgService().getPlanetImgById(1);
     } catch (error) {
-      this.imagePlanet = await getImgService().getPlanetImgByError();
+      this.imagePlanet = await getImgService().getImgByError();
     }
   },
   watch: {
@@ -41,7 +41,7 @@ export default {
       try {
         this.imagePlanet = await getImgService().getPlanetImgById(newVal + 1);
       } catch (error) {
-        this.imagePlanet = await getImgService().getPlanetImgByError();
+        this.imagePlanet = await getImgService().getImgByError();
       }
     },
   },

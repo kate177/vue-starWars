@@ -21,14 +21,16 @@ export function getImgService() {
     });
   }
 
-  function getPlanetImgByError() {
-    return imageAPI.get("big-placeholder.jpg", { responseType: "arraybuffer" });
+  function getImgByError() {
+    return imageAPI.get("big-placeholder.jpg", {
+      responseType: "arraybuffer",
+    });
   }
 
   return {
     getPersonImgById,
     getPlanetImgById,
     getStarshipImgById,
-    getPlanetImgByError,
+    getImgByError,
   };
 }

@@ -38,7 +38,7 @@ export default {
     this.truncate();
     this.interval = setInterval(() => {
       this.rondomPlanet();
-    }, 10000);
+    }, 9000);
   },
   methods: {
     async fetchData() {
@@ -49,7 +49,7 @@ export default {
       try {
         this.imagePlanets = await getImgService().getPlanetImgById(1);
       } catch (error) {
-        this.imagePlanets = await getImgService().getPlanetImgByError();
+        this.imagePlanets = await getImgService().getImgByError();
       }
     },
     async rondomPlanet() {

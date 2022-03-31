@@ -38,11 +38,17 @@ export default {
     };
   },
   async created() {
-    const response = await planetsService().getPlanets();
-    this.imagePlanet = await getImgService().getPlanetImgById(
-      Number(this.userID) + 1
-    );
-    this.planetInfo = response.results[this.userID];
+    try {
+      const response = await planetsService().getPlanets();
+      this.imagePlanet = await getImgService().getPlanetImgById(
+        Number(this.userID) + 1
+      );
+      this.planetInfo = response.results[this.userID];
+    } catch (e) {
+      this.imagePlanet = await getImgService().getImgByError();
+      const response = await planetsService().getPlanets();
+      this.planetInfo = response.results[this.userID];
+    }
   },
   computed: {
     dataUrl() {

@@ -39,10 +39,11 @@ const routes = [
     ],
   },
   {
-    path: "/:pathMatch(.*)*",
+    path: "/not-found",
     name: "notFound",
-    component: () => import("../views/Test.vue"),
+    component: () => import("../views/404.vue"),
   },
+  { path: "/:pathMatch(.*)*", redirect: { name: "notFound" } },
 ];
 
 const router = createRouter({

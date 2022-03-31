@@ -1,5 +1,5 @@
 <template>
-  <div :class="[isSmall ? 'small' : 'large', 'loader']"></div>
+  <div :class="['isSmall' ? 'small' : 'large', 'loader']"></div>
 </template>
 
 <script>
@@ -9,7 +9,7 @@ export default {
 </script>
 
 <style lang="scss">
-.large {
+.small {
   width: 64px;
   height: 64px;
   border: 8px solid;
@@ -17,13 +17,6 @@ export default {
   top: 55%;
   left: 45%;
   transform: translate(-50%, -50%);
-}
-
-.small {
-  width: 16px;
-  height: 16px;
-  border: 2px solid;
-  margin: 5px;
 }
 
 .loader {

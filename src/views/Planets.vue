@@ -13,7 +13,7 @@
         </li>
       </ul>
     </div>
-    <PlanetsCard :planet="planet" :id="id" v-if="planet" />
+    <PlanetsCard :sphere="sphere" :id="id" v-if="sphere" />
   </section>
 </template>
 
@@ -23,7 +23,7 @@ import PlanetsCard from "../components/PlanetsCard.vue";
 import Loader from "@/components/Loader.vue";
 export default {
   data() {
-    return { planets: [], planet: null, id: null };
+    return { planets: [], sphere: null, id: null };
   },
   components: {
     Loader,
@@ -31,7 +31,7 @@ export default {
   },
   methods: {
     onclickPlanet(idx) {
-      this.planet = this.planets[idx];
+      this.sphere = this.planets[idx];
       this.id = idx;
     },
   },
@@ -41,7 +41,7 @@ export default {
       const response = await planetsService().getPlanets();
       this.loading = false;
       this.planets = response.results;
-      this.planet = response.results[0];
+      this.sphere = response.results[0];
     } catch (e) {}
   },
 };
