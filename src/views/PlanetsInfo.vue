@@ -29,6 +29,8 @@
 import { planetsService } from "@/services/planets.js";
 import { getImgService } from "@/services/imageService.js";
 import { Formatter } from "@/helpers/formatter";
+import img from "../assets/img/big-placeholder.jpg";
+
 export default {
   data() {
     return {
@@ -45,7 +47,7 @@ export default {
       );
       this.planetInfo = response.results[this.userID];
     } catch (e) {
-      this.imagePlanet = await getImgService().getImgByError();
+      this.imagePlanet = img;
       const response = await planetsService().getPlanets();
       this.planetInfo = response.results[this.userID];
     }

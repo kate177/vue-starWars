@@ -3,7 +3,7 @@
     class="feature"
     @click="$router.push({ name: 'peopleInfo', params: { id: id } })"
   >
-    <div class="feature__img"><img :src="dataUrl" /></div>
+    <div class="feature__img"><img :src="dataUrl" />/></div>
     <div class="feature__info">
       <h2 class="feature__title">{{ person.name }}</h2>
       <ul class="feature__list">
@@ -19,6 +19,8 @@
 import { peopleService } from "@/services/people.js";
 import { getImgService } from "@/services/imageService.js";
 import { Formatter } from "@/helpers/formatter";
+import img from "../assets/img/big-placeholder.jpg";
+
 export default {
   data() {
     return { imagePeople: null };
@@ -31,7 +33,7 @@ export default {
     try {
       this.imagePeople = await getImgService().getPersonImgById("1");
     } catch (error) {
-      this.imagePeople = await getImgService().getImgByError();
+      this.imagePeople = img;
     }
   },
   watch: {
@@ -39,8 +41,23 @@ export default {
       try {
         this.imagePeople = await getImgService().getPersonImgById(newVal + 1);
       } catch (error) {
-        this.imagePeople = await getImgService().getImgByError();
+        this.imagePeople = img;
       }
+    },
+  },
+  watch: {
+    id: {
+      handler(newVal) {
+        getImgService()
+          .getPersonImgById(newVal + 1)
+          .then((response) => {
+            this.imagePeople = response;
+          })
+          .catch(() => {
+            this.imagePeople = img;
+          });
+      },
+      immediate: true,
     },
   },
   computed: {

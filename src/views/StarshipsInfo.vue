@@ -41,6 +41,8 @@
 import { starshipsService } from "@/services/starships.js";
 import { getImgService } from "@/services/imageService.js";
 import { Formatter } from "@/helpers/formatter";
+import img from "../assets/img/big-placeholder.jpg";
+
 export default {
   data() {
     return {
@@ -57,7 +59,7 @@ export default {
       );
       this.starshipsInfo = response.results[this.userID];
     } catch (e) {
-      this.imageStarship = await getImgService().getImgByError();
+      this.imageStarship = img;
       const response = await starshipsService().getStarships();
       this.starshipsInfo = response.results[this.userID];
     }

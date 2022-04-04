@@ -28,6 +28,8 @@
 import { peopleService } from "@/services/people.js";
 import { getImgService } from "@/services/imageService.js";
 import { Formatter } from "@/helpers/formatter";
+import img from "../assets/img/big-placeholder.jpg";
+
 export default {
   data() {
     return {
@@ -37,13 +39,17 @@ export default {
     };
   },
   async created() {
-    const response = await peopleService().getPeople();
-    this.imagePeople = await getImgService().getPersonImgById(
-      Number(this.userID) + 1
-    );
-    this.personInfo = response.results[this.userID];
-    this.planetShow = response.results[this.userID].homeworld;
-    this.$emit("planetInf", this.planetShow);
+    try {
+      const response = await peopleService().getPeople();
+      this.imagePeople = await getImgService().getPersonImgById(
+        Number(this.userID) + 1
+      );
+      this.personInfo = response.results[this.userID];
+      this.planetShow = response.results[this.userID].homeworld;
+      this.$emit("planetInf", this.planetShow);
+    } catch (error) {
+      this.imagePeople = img;
+    }
   },
   computed: {
     dataUrl() {

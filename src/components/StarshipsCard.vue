@@ -3,7 +3,9 @@
     class="feature"
     @click="$router.push({ name: 'starshipsInfo', params: { id: id } })"
   >
-    <div class="feature__imgs"><img :src="dataUrl" /></div>
+    <div class="feature__imgs">
+      <img :src="dataUrl" />
+    </div>
     <div class="feature__info">
       <h2 class="feature__title">{{ starship.name }}</h2>
       <ul class="feature__list">
@@ -24,6 +26,7 @@
 <script>
 import { getImgService } from "@/services/imageService.js";
 import { Formatter } from "@/helpers/formatter";
+import img from "../assets/img/big-placeholder.jpg";
 
 export default {
   data() {
@@ -37,18 +40,22 @@ export default {
     try {
       this.imageStarship = await getImgService().getStarshipImgById(1);
     } catch (error) {
-      this.imageStarship = await getImgService().getImgByError();
+      this.imageStarship = img;
     }
   },
   watch: {
-    id: async function (newVal) {
-      try {
-        this.imageStarship = await getImgService().getStarshipImgById(
-          newVal + 1
-        );
-      } catch (error) {
-        this.imageStarship = await getImgService().getImgByError();
-      }
+    id: {
+      handler(newVal) {
+        getImgService()
+          .getStarshipImgById(newVal + 1)
+          .then((response) => {
+            this.imageStarship = response;
+          })
+          .catch(() => {
+            this.imageStarship = img;
+          });
+      },
+      immediate: true,
     },
   },
   computed: {

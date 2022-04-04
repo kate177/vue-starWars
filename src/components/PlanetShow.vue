@@ -20,7 +20,8 @@
 import { planetsService } from "@/services/planets.js";
 import { getImgService } from "@/services/imageService.js";
 import { Formatter } from "@/helpers/formatter";
-import axios from "axios";
+import img from "../assets/img/big-placeholder.jpg";
+
 export default {
   data() {
     return {
@@ -49,7 +50,7 @@ export default {
       try {
         this.imagePlanets = await getImgService().getPlanetImgById(1);
       } catch (error) {
-        this.imagePlanets = await getImgService().getImgByError();
+        this.imagePlanets = img;
       }
     },
     async rondomPlanet() {
@@ -60,17 +61,25 @@ export default {
           this.imagePlanets = await getImgService().getPlanetImgById(this.id);
           this.planetShow = response.results[this.id - 1];
         }
-      } catch (e) {}
+      } catch (e) {
+        this.imagePlanets = img;
+      }
     },
   },
   watch: {
     planet: async function () {
-      clearTimeout(this.interval);
-      let idxImg = parseInt(this.planet.match(/\d+/));
-      this.imagePlanets = await getImgService().getPlanetImgById(idxImg);
-      axios.get(this.planet).then((response) => {
-        this.planetShow = response.data;
-      });
+      try {
+        clearTimeout(this.interval);
+        let idxImg = parseInt(this.planet.match(/\d+/));
+        this.imagePlanets = await getImgService().getPlanetImgById(idxImg);
+        const response = await planetsService().getPlanets();
+        this.planetShow = response.results[idxImg - 1];
+      } catch (error) {
+        this.imagePlanets = img;
+        let idxImg = parseInt(this.planet.match(/\d+/));
+        const response = await planetsService().getPlanets();
+        this.planetShow = response.results[idxImg - 1];
+      }
     },
   },
   computed: {

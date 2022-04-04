@@ -20,6 +20,7 @@
 <script>
 import { getImgService } from "@/services/imageService.js";
 import { Formatter } from "@/helpers/formatter";
+import img from "../assets/img/big-placeholder.jpg";
 
 export default {
   data() {
@@ -33,16 +34,22 @@ export default {
     try {
       this.imagePlanet = await getImgService().getPlanetImgById(1);
     } catch (error) {
-      this.imagePlanet = await getImgService().getImgByError();
+      this.imagePlanet = img;
     }
   },
   watch: {
-    id: async function (newVal) {
-      try {
-        this.imagePlanet = await getImgService().getPlanetImgById(newVal + 1);
-      } catch (error) {
-        this.imagePlanet = await getImgService().getImgByError();
-      }
+    id: {
+      handler(newVal) {
+        getImgService()
+          .getPlanetImgById(newVal + 1)
+          .then((response) => {
+            this.imagePlanet = response;
+          })
+          .catch(() => {
+            this.imagePlanet = img;
+          });
+      },
+      immediate: true,
     },
   },
   computed: {
