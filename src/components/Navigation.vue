@@ -1,21 +1,49 @@
 <template>
   <header class="header">
-    <h1 class="header__title">StarDB</h1>
+    <router-link
+      to="/"
+      class="header__title"
+      @click="$emit('displayPlanetShow', !this.displayPlanet)"
+      >StarDB</router-link
+    >
     <ul class="header__list">
       <li>
-        <router-link to="/people" class="header__people">People</router-link>
+        <router-link
+          to="/people"
+          class="header__people"
+          @click="$emit('displayPlanetShow', this.displayPlanet)"
+          >People</router-link
+        >
       </li>
       <li>
-        <router-link to="/planets" class="header__planets">Planets</router-link>
+        <router-link
+          to="/planets"
+          class="header__planets"
+          @click="$emit('displayPlanetShow', this.displayPlanet)"
+          >Planets</router-link
+        >
       </li>
       <li>
-        <router-link to="/starships" class="header__starships"
+        <router-link
+          to="/starships"
+          class="header__starships"
+          @click="$emit('displayPlanetShow', this.displayPlanet)"
           >Starships</router-link
         >
       </li>
     </ul>
   </header>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      displayPlanet: true,
+    };
+  },
+};
+</script>
 
 <style lang="scss">
 .header {
@@ -54,20 +82,11 @@
 .active-link {
   text-decoration: underline;
 }
-@media screen and (max-width: 1200px) {
-  .wrapper {
-    width: 930px;
-  }
+.header__title {
+  text-decoration: none;
 }
-@media screen and (max-width: 990px) {
-  .wrapper {
-    width: 690px;
-  }
-}
+
 @media screen and (max-width: 768px) {
-  .wrapper {
-    width: 510px;
-  }
   .header {
     flex-direction: column;
     &__title {
@@ -77,12 +96,6 @@
       margin: 0 auto;
       margin-top: 15px;
     }
-  }
-}
-@media screen and (max-width: 576px) {
-  .wrapper {
-    width: 100%;
-    padding: 0px 15px 15px;
   }
 }
 @media screen and (max-width: 413px) {

@@ -49,7 +49,7 @@ export default {
     async truncate() {
       try {
         this.imagePlanets = await getImgService().getPlanetImgById(1);
-      } catch (error) {
+      } catch {
         this.imagePlanets = img;
       }
     },
@@ -61,7 +61,7 @@ export default {
           this.imagePlanets = await getImgService().getPlanetImgById(this.id);
           this.planetShow = response.results[this.id - 1];
         }
-      } catch (e) {
+      } catch {
         this.imagePlanets = img;
       }
     },
@@ -74,7 +74,7 @@ export default {
         this.imagePlanets = await getImgService().getPlanetImgById(idxImg);
         const response = await planetsService().getPlanets();
         this.planetShow = response.results[idxImg - 1];
-      } catch (error) {
+      } catch {
         this.imagePlanets = img;
         let idxImg = parseInt(this.planet.match(/\d+/));
         const response = await planetsService().getPlanets();

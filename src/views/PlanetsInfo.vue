@@ -1,23 +1,31 @@
 <template>
-  <div class="feature" v-if="planetInfo">
-    <div class="feature__img"><img :src="dataUrl" /></div>
-    <div class="feature__info">
-      <h2 class="feature__title">{{ planetInfo.name }}</h2>
-      <ul class="feature__list">
-        <li class="feature-info__list">Diametr: {{ planetInfo.diameter }}</li>
-        <li class="feature-info__list">
+  <div class="fullInformation" v-if="planetInfo">
+    <div class="fullInformation__img"><img :src="dataUrl" /></div>
+    <div class="fullInformation__info">
+      <h2 class="fullInformation__title">{{ planetInfo.name }}</h2>
+      <ul class="fullInformation__list">
+        <li class="fullInformation-info__list">
+          Diametr: {{ planetInfo.diameter }}
+        </li>
+        <li class="fullInformation-info__list">
           Population: {{ planetInfo.population }}
         </li>
-        <li class="feature-info__list">
+        <li class="fullInformation-info__list">
           Rotation Period: {{ planetInfo.rotation_period }}
         </li>
-        <li class="feature-info__list">
+        <li class="fullInformation-info__list">
           Оrbital period: {{ planetInfo.orbital_period }}
         </li>
-        <li class="feature-info__list">Сlimate: {{ planetInfo.climate }}</li>
-        <li class="feature-info__list">Gravity: {{ planetInfo.gravity }}</li>
-        <li class="feature-info__list">Terrain: {{ planetInfo.terrain }}</li>
-        <li class="feature-info__list">
+        <li class="fullInformation-info__list">
+          Сlimate: {{ planetInfo.climate }}
+        </li>
+        <li class="fullInformation-info__list">
+          Gravity: {{ planetInfo.gravity }}
+        </li>
+        <li class="fullInformation-info__list">
+          Terrain: {{ planetInfo.terrain }}
+        </li>
+        <li class="fullInformation-info__list">
           Surface water: {{ planetInfo.surface_water }}
         </li>
       </ul>
@@ -61,7 +69,7 @@ export default {
 </script>
 
 <style lang="scss">
-.feature {
+.fullInformation {
   margin-top: 40px;
   display: flex;
   width: 100%;
@@ -71,7 +79,7 @@ export default {
   background-color: #303030;
   &__img {
     width: 240px;
-    height: 280px;
+    height: 250px;
     border-radius: 10px;
     margin-right: 50px;
   }
@@ -80,7 +88,9 @@ export default {
     height: 100%;
     border-radius: 10px;
   }
-
+  &__info {
+    width: 63%;
+  }
   &__title {
     font-size: 28px;
     font-weight: 500;
@@ -90,13 +100,14 @@ export default {
   }
   &__list {
     height: 280px;
-    width: 70%;
+    width: 75%;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
   }
   &__list li {
-    width: 200px;
+    width: 205px;
+    height: auto;
     margin-right: 60px;
     padding: 12px 10px;
     border: 1px solid #444;
@@ -106,41 +117,40 @@ export default {
   }
 }
 @media screen and (max-width: 990px) {
-  .feature {
+  .fullInformation {
     max-height: 100%;
     padding: 15px;
-    &__list {
-      flex-wrap: nowrap;
-    }
     &__list li {
-      width: 250px;
-      margin-right: 0px;
+      margin-right: 20px;
     }
   }
 }
 @media screen and (max-width: 768px) {
-  .feature__list li {
-    width: 240px;
-  }
-  .feature__img {
-    width: 240px;
-    height: 290px;
-    margin-right: 30px;
-  }
-}
-@media screen and (max-width: 576px) {
-  .feature {
+  .fullInformation {
     flex-direction: column;
     height: 100%;
     &__img {
       margin: 0 auto;
-      width: 230px;
+      width: 220px;
+      height: 240px;
     }
     &__info {
-      margin-top: 15px;
+      width: 100%;
+      margin-top: 20px;
     }
     &__list {
       width: 100%;
+    }
+  }
+}
+@media screen and (max-width: 576px) {
+  .fullInformation {
+    &__img {
+      width: 200px;
+      height: 230px;
+    }
+    &__list {
+      height: auto;
     }
     &__list li {
       width: 100%;

@@ -1,7 +1,8 @@
 <template>
-  <Navigation />
-  <PlanetShow :planet="planet" />
-  <router-view @planetInf="planet = $event" />
+  <Navigation @displayPlanetShow="displayPlanet = $event" />
+  <PlanetShow v-if="this.displayPlanet" :planet="planet" />
+  <img v-else class="main-img" src="../assets/img/Frame1.png" />
+  <router-view v-if="this.displayPlanet" @planetInf="planet = $event" />
 </template>
 
 <script>
@@ -16,25 +17,44 @@ export default {
   data() {
     return {
       planet: null,
+      displayPlanet: false,
     };
   },
 };
 </script>
 
-<style>
-.wrapper-main {
+<style lang="scss">
+.wrapper {
+  width: 1110px;
+  height: 100%;
   margin: 0 auto;
-  width: 300px;
-  margin-top: 100px;
+  padding-bottom: 60px;
 }
-.main-title {
-  font-size: 64px;
-  margin-bottom: 30px;
-  color: #1e705f;
+.main-img {
+  margin: 0 auto;
+  width: 100%;
+  margin-top: 40px;
 }
-.main-subtitle {
-  font-size: 52px;
-  color: #fff;
-  margin-left: 20px;
+@media screen and (max-width: 1200px) {
+  .wrapper {
+    width: 930px;
+  }
+}
+@media screen and (max-width: 990px) {
+  .wrapper {
+    width: 100%;
+    padding: 0px 30px 0px 30px;
+  }
+}
+@media screen and (max-width: 768px) {
+  .main-img {
+    margin-top: 20px;
+  }
+}
+@media screen and (max-width: 576px) {
+  .wrapper {
+    width: 100%;
+    padding: 0px 10px 10px;
+  }
 }
 </style>

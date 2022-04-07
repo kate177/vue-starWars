@@ -1,35 +1,43 @@
 <template>
-  <div class="feature" v-if="starshipsInfo">
-    <div class="feature__img"><img :src="dataUrl" /></div>
-    <div class="feature__info">
-      <h2 class="feature__title">{{ starshipsInfo.name }}</h2>
-      <ul class="feature__list">
-        <li class="feature-info__list">Model:{{ starshipsInfo.model }}</li>
-        <li class="feature-info__list">
+  <div class="fullInformation" v-if="starshipsInfo">
+    <div class="fullInformation__img"><img :src="dataUrl" /></div>
+    <div class="fullInformation__info">
+      <h2 class="fullInformation__title">{{ starshipsInfo.name }}</h2>
+      <ul class="fullInformation__list">
+        <li class="fullInformation-info__list">
+          Model:{{ starshipsInfo.model }}
+        </li>
+        <li class="fullInformation-info__list">
           Manufacturer:{{ starshipsInfo.manufacturer }}
         </li>
-        <li class="feature-info__list">Length: {{ starshipsInfo.length }}</li>
-        <li class="feature-info__list">Crew: {{ starshipsInfo.crew }}</li>
-        <li class="feature-info__list">
+        <li class="fullInformation-info__list">
+          Length: {{ starshipsInfo.length }}
+        </li>
+        <li class="fullInformation-info__list">
+          Crew: {{ starshipsInfo.crew }}
+        </li>
+        <li class="fullInformation-info__list">
           Passengers: {{ starshipsInfo.passengers }}
         </li>
-        <li class="feature-info__list">
+        <li class="fullInformation-info__list">
           Cost in credits: {{ starshipsInfo.cost_in_credits }}
         </li>
-        <li class="feature-info__list">
+        <li class="fullInformation-info__list">
           Max atmosphering speed: {{ starshipsInfo.max_atmosphering_speed }}
         </li>
-        <li class="feature-info__list">
+        <li class="fullInformation-info__list">
           Cargo capacity: {{ starshipsInfo.cargo_capacity }}
         </li>
-        <li class="feature-info__list">
+        <li class="fullInformation-info__list">
           Consumables: {{ starshipsInfo.consumables }}
         </li>
-        <li class="feature-info__list">
+        <li class="fullInformation-info__list">
           Hyperdrive rating: {{ starshipsInfo.hyperdrive_rating }}
         </li>
-        <li class="feature-info__list">MGLT: {{ starshipsInfo.MGLT }}</li>
-        <li class="feature-info__list">
+        <li class="fullInformation-info__list">
+          MGLT: {{ starshipsInfo.MGLT }}
+        </li>
+        <li class="fullInformation-info__list">
           Starship class: {{ starshipsInfo.starship_class }}
         </li>
       </ul>
@@ -58,7 +66,7 @@ export default {
         Number(this.userID) + 1
       );
       this.starshipsInfo = response.results[this.userID];
-    } catch (e) {
+    } catch {
       this.imageStarship = img;
       const response = await starshipsService().getStarships();
       this.starshipsInfo = response.results[this.userID];
@@ -73,7 +81,7 @@ export default {
 </script>
 
 <style lang="scss">
-.feature {
+.fullInformation {
   margin-top: 40px;
   display: flex;
   width: 100%;
@@ -83,7 +91,7 @@ export default {
   background-color: #303030;
   &__img {
     width: 240px;
-    height: 310px;
+    height: 250px;
     border-radius: 10px;
     margin-right: 50px;
   }
@@ -92,7 +100,9 @@ export default {
     height: 100%;
     border-radius: 10px;
   }
-
+  &__info {
+    width: 63%;
+  }
   &__title {
     font-size: 28px;
     font-weight: 500;
@@ -102,13 +112,14 @@ export default {
   }
   &__list {
     height: 280px;
-    width: 70%;
+    width: 100%;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
   }
   &__list li {
-    width: 200px;
+    width: 205px;
+    height: auto;
     margin-right: 60px;
     padding: 12px 10px;
     border: 1px solid #444;
@@ -118,41 +129,40 @@ export default {
   }
 }
 @media screen and (max-width: 990px) {
-  .feature {
+  .fullInformation {
     max-height: 100%;
     padding: 15px;
-    &__list {
-      flex-wrap: nowrap;
-    }
     &__list li {
-      width: 250px;
-      margin-right: 0px;
+      margin-right: 20px;
     }
   }
 }
 @media screen and (max-width: 768px) {
-  .feature__list li {
-    width: 240px;
-  }
-  .feature__img {
-    width: 240px;
-    height: 290px;
-    margin-right: 30px;
-  }
-}
-@media screen and (max-width: 576px) {
-  .feature {
+  .fullInformation {
     flex-direction: column;
     height: 100%;
     &__img {
       margin: 0 auto;
-      width: 230px;
+      width: 220px;
+      height: 240px;
     }
     &__info {
-      margin-top: 15px;
+      width: 100%;
+      margin-top: 20px;
     }
     &__list {
       width: 100%;
+    }
+  }
+}
+@media screen and (max-width: 576px) {
+  .fullInformation {
+    &__img {
+      width: 200px;
+      height: 230px;
+    }
+    &__list {
+      height: auto;
     }
     &__list li {
       width: 100%;

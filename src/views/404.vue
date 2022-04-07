@@ -2,7 +2,7 @@
   <div class="wrapper-mistake">
     <div class="wrapper-mistak__inner">
       <h2 class="mistak-inner__subtitle">Not Found</h2>
-      <img src="../assets/img/404-error.png" />
+      <img class="error-img" src="../assets/img/404-error.png" />
       <router-link to="/" class="people_list">Main Page</router-link>
     </div>
   </div>
@@ -35,7 +35,7 @@
   color: #ffffff;
   margin-bottom: 40px;
 }
-img {
+.error-img {
   width: 200px;
   height: 210px;
   margin-bottom: 40px;
