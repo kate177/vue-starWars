@@ -54,21 +54,21 @@ export default {
   align-items: baseline;
   margin-top: 40px;
   &__list {
-    background-color: #303030;
+    background-color: var(--dynamic-background-color);
     width: 50%;
     height: 30%;
   }
   &__name li {
     display: block;
     padding: 17px 15px;
-    border: 1px solid #444;
+    border: 1px solid var(--dynamic-border-color);
     border-radius: 5px;
     font-size: 16px;
-    color: #fff;
+    color: var(--dynamic-text-color);
   }
   &__name li:hover {
     cursor: pointer;
-    background-color: #3f3f3f;
+    background-color: var(--dynamic-hover-color);
   }
 }
 @media screen and (max-width: 1200px) {

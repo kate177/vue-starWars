@@ -3,7 +3,7 @@
     class="feature"
     @click="$router.push({ name: 'peopleInfo', params: { id: id } })"
   >
-    <div class="feature__img"><img :src="dataUrl" />/></div>
+    <div class="feature__img"><img :src="dataUrl" /></div>
     <div class="feature__info">
       <h2 class="feature__title">{{ person.name }}</h2>
       <ul class="feature__list">
@@ -66,7 +66,7 @@ export default {
   width: 45%;
   padding: 16px;
   border-radius: 5px;
-  background-color: #303030;
+  background-color: var(--dynamic-background-color);
   &__img {
     width: 180px;
     height: 250px;
@@ -86,14 +86,14 @@ export default {
     font-weight: 500;
     letter-spacing: 0.05em;
     margin-bottom: 15px;
-    color: #fff;
+    color: var(--dynamic-text-color);
   }
   &__list li {
     padding: 12px 10px;
-    border: 1px solid #444;
+    border: 1px solid var(--dynamic-border-color);
     border-width: 1px 0 0px;
     font-size: 16px;
-    color: #fff;
+    color: var(--dynamic-text-color);
   }
 }
 @media screen and (max-width: 1200px) {

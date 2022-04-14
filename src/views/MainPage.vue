@@ -1,18 +1,25 @@
 <template>
-  <Navigation @displayPlanetShow="displayPlanet = $event" />
-  <PlanetShow v-if="this.displayPlanet" :planet="planet" />
-  <img v-else class="main-img" src="../assets/img/Frame1.png" />
-  <router-view v-if="this.displayPlanet" @planetInf="planet = $event" />
+  <div class="wrapper">
+    <div class="wrapper__header">
+      <Navigation @displayPlanetShow="displayPlanet = $event" />
+      <Switch />
+    </div>
+    <PlanetShow v-if="this.displayPlanet" :planet="planet" />
+    <img v-else class="main-img" src="../assets/img/Frame1.png" />
+    <router-view @planetInf="planet = $event" />
+  </div>
 </template>
 
 <script>
 import PlanetShow from "../components/PlanetShow.vue";
 import Navigation from "../components/Navigation.vue";
+import Switch from "../components/Switch.vue";
 
 export default {
   components: {
     PlanetShow,
     Navigation,
+    Switch,
   },
   data() {
     return {
@@ -29,12 +36,18 @@ export default {
   height: 100%;
   margin: 0 auto;
   padding-bottom: 60px;
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
 }
 .main-img {
   margin: 0 auto;
   width: 100%;
   margin-top: 40px;
 }
+
 @media screen and (max-width: 1200px) {
   .wrapper {
     width: 930px;

@@ -88,7 +88,7 @@ export default {
   height: 350px;
   padding: 20px;
   border-radius: 5px;
-  background-color: #303030;
+  background-color: var(--dynamic-background-color);
   &__img {
     width: 240px;
     height: 250px;
@@ -108,7 +108,7 @@ export default {
     font-weight: 500;
     letter-spacing: 0.05em;
     margin-bottom: 15px;
-    color: #fff;
+    color: var(--dynamic-text-color);
   }
   &__list {
     height: 280px;
@@ -122,10 +122,10 @@ export default {
     height: auto;
     margin-right: 60px;
     padding: 12px 10px;
-    border: 1px solid #444;
+    border: 1px solid var(--dynamic-border-color);
     border-width: 1px 0 0px;
     font-size: 16px;
-    color: #fff;
+    color: var(--dynamic-text-color);
   }
 }
 @media screen and (max-width: 990px) {

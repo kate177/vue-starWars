@@ -94,7 +94,7 @@ export default {
 .planet {
   display: flex;
   padding: 16px;
-  background-color: #303030;
+  background-color: var(--dynamic-background-color);
   border-radius: 5px;
   &__img {
     width: 200px;
@@ -112,17 +112,17 @@ export default {
     font-weight: 500;
     letter-spacing: 0.05em;
     margin-bottom: 15px;
-    color: #fff;
+    color: var(--dynamic-text-color);
   }
 }
 .planet-list {
   margin-left: 20px;
   &.planet-list li {
     padding: 12px 10px;
-    border: 1px solid #444;
+    border: 1px solid var(--dynamic-border-color);
     border-width: 1px 0 0px;
     font-size: 16px;
-    color: #fff;
+    color: var(--dynamic-text-color);
   }
 }
 @media screen and (max-width: 576px) {

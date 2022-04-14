@@ -54,7 +54,7 @@ export default {
     font-size: 42px;
     font-weight: 500;
     letter-spacing: 0.05em;
-    color: #ffffff;
+    color: var(--dynamic-text-color);
     margin: 0px 65px 0px 10px;
   }
   &__list {

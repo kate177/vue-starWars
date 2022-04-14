@@ -1,0 +1,15 @@
+:root {
+--app-background-color: #E9E8D9;
+--dynamic-text-color: #000;
+--dynamic-background-color: #F4F4E6;
+--dynamic-border-color: #9E7B47;
+--dynamic-hover-color: #DBDACC;
+}
+
+[theme="dark"] {
+--app-background-color: #222222;
+--dynamic-text-color: #fff;
+--dynamic-background-color: #303030;
+--dynamic-border-color: #444;
+--dynamic-hover-color: #3f3f3f;
+}
