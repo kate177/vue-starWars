@@ -4,7 +4,7 @@
       <Navigation @displayPlanetShow="displayPlanet = $event" />
       <div class="wrapper__right">
         <SwitchTheme />
-        <LangSwitch />
+        <SwitchLang />
       </div>
     </div>
     <PlanetShow v-if="this.displayPlanet" :planet="planet" />
@@ -17,14 +17,14 @@
 import PlanetShow from "../components/PlanetShow.vue";
 import Navigation from "../components/Navigation.vue";
 import SwitchTheme from "../components/SwitchTheme.vue";
-import LangSwitch from "../components/LangSwitch.vue";
+import SwitchLang from "../components/SwitchLang.vue";
 
 export default {
   components: {
     PlanetShow,
     Navigation,
     SwitchTheme,
-    LangSwitch,
+    SwitchLang,
   },
   data() {
     return {

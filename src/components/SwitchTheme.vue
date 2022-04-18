@@ -4,7 +4,7 @@
     <img class="header-switch__sun" src="../assets/img/sun.png" />
     <div
       class="header-switch__circle"
-      v-bind:class="{ 'active-switch': isActive }"
+      v-bind:class="{ 'active-switch': darkMode }"
     ></div>
   </div>
 </template>
@@ -13,35 +13,29 @@
 export default {
   data() {
     return {
-      isActive: true,
       darkMode: false,
     };
   },
   methods: {
     onclickSwitch() {
-      this.isActive = !this.isActive;
       this.darkMode = !this.darkMode;
     },
   },
   mounted() {
     let htmlElement = document.documentElement;
     let theme = localStorage.getItem("theme");
-    let isActives = localStorage.getItem("iaActives");
 
     if (theme === "dark") {
       htmlElement.setAttribute("theme", "dark");
       this.darkMode = true;
-      this.isActive = false;
     } else {
       htmlElement.setAttribute("theme", "light");
       this.darkMode = false;
-      this.isActive = true;
     }
   },
   watch: {
     darkMode: function () {
       let htmlElement = document.documentElement;
-
       if (this.darkMode) {
         localStorage.setItem("theme", "dark");
         htmlElement.setAttribute("theme", "dark");

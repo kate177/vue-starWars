@@ -23,6 +23,7 @@ export default {
   methods: {
     handleChange(event) {
       localStorage.setItem("lang", event.target.value);
+
       this.$i18n.locale = this.lang;
     },
   },
