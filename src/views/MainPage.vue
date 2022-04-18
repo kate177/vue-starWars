@@ -2,7 +2,10 @@
   <div class="wrapper">
     <div class="wrapper__header">
       <Navigation @displayPlanetShow="displayPlanet = $event" />
-      <Switch />
+      <div class="wrapper__right">
+        <SwitchTheme />
+        <LangSwitch />
+      </div>
     </div>
     <PlanetShow v-if="this.displayPlanet" :planet="planet" />
     <img v-else class="main-img" src="../assets/img/Frame1.png" />
@@ -13,19 +16,25 @@
 <script>
 import PlanetShow from "../components/PlanetShow.vue";
 import Navigation from "../components/Navigation.vue";
-import Switch from "../components/Switch.vue";
+import SwitchTheme from "../components/SwitchTheme.vue";
+import LangSwitch from "../components/LangSwitch.vue";
 
 export default {
   components: {
     PlanetShow,
     Navigation,
-    Switch,
+    SwitchTheme,
+    LangSwitch,
   },
   data() {
     return {
       planet: null,
       displayPlanet: false,
     };
+  },
+  mounted() {
+    localStorage.setItem("switch", this.displayPlanet);
+    this.displayPlanet = localStorage.getItem("switch");
   },
 };
 </script>
@@ -39,6 +48,10 @@ export default {
   &__header {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+  }
+  &__right {
+    display: flex;
     align-items: center;
   }
 }
@@ -60,6 +73,14 @@ export default {
   }
 }
 @media screen and (max-width: 768px) {
+  .wrapper__header {
+    flex-direction: column;
+  }
+  .wrapper__right {
+    order: -1;
+    margin-left: 70%;
+    margin-top: 10px;
+  }
   .main-img {
     margin-top: 20px;
   }
@@ -68,6 +89,9 @@ export default {
   .wrapper {
     width: 100%;
     padding: 0px 10px 10px;
+    &__right {
+      margin-left: 60%;
+    }
   }
 }
 </style>

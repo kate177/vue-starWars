@@ -12,7 +12,7 @@
           to="/people"
           class="header__people"
           @click="$emit('displayPlanetShow', this.displayPlanet)"
-          >People</router-link
+          >{{ $t("people") }}</router-link
         >
       </li>
       <li>
@@ -20,7 +20,7 @@
           to="/planets"
           class="header__planets"
           @click="$emit('displayPlanetShow', this.displayPlanet)"
-          >Planets</router-link
+          >{{ $t("planets") }}</router-link
         >
       </li>
       <li>
@@ -28,7 +28,7 @@
           to="/starships"
           class="header__starships"
           @click="$emit('displayPlanetShow', this.displayPlanet)"
-          >Starships</router-link
+          >{{ $t("starships") }}</router-link
         >
       </li>
     </ul>

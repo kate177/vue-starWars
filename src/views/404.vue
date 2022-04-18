@@ -32,7 +32,7 @@
   font-size: 46px;
   font-weight: 500;
   letter-spacing: 0.05em;
-  color: #ffffff;
+  color: var(--dynamic-text-color);
   margin-bottom: 40px;
 }
 .error-img {

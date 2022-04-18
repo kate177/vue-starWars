@@ -21,9 +21,9 @@ export default {
 
 .loader {
   border-top-color: #00644f;
-  border-right-color: #383838;
+  border-right-color: var(--loader-border-color);
   border-bottom-color: #00644f;
-  border-left-color: #383838;
+  border-left-color: var(--loader-border-color);
   border-radius: 50%;
   animation: spin 1s linear infinite;
 }

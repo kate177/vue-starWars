@@ -60,6 +60,7 @@ export default {
   height: 28px;
   border: 1px solid #1e705f;
   border-radius: 70px;
+  margin-right: 30px;
   display: flex;
   justify-content: space-between;
   cursor: pointer;
@@ -84,5 +85,28 @@ export default {
 }
 .active-switch {
   margin-left: 26px;
+}
+@media screen and (max-width: 576px) {
+  .header-switch {
+    width: 41px;
+    height: 20px;
+    &__moon {
+      width: 14px;
+      height: 14px;
+      margin: 3px 0px 3px 4px;
+    }
+    &__sun {
+      width: 14px;
+      height: 14px;
+      margin: 3px 4px 3px 0px;
+    }
+    &__circle {
+      width: 18.5px;
+      height: 18.5px;
+    }
+    .active-switch {
+      margin-left: 20.5px;
+    }
+  }
 }
 </style>
