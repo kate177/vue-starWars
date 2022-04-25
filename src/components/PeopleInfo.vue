@@ -1,12 +1,12 @@
 <template>
   <div
-    class="feature"
+    class="feature-people"
     @click="$router.push({ name: 'peopleInfo', params: { id: id } })"
   >
-    <div class="feature__img"><img :src="dataUrl" /></div>
-    <div class="feature__info">
-      <h2 class="feature__title">{{ person.name }}</h2>
-      <ul class="feature__list">
+    <div class="feature-people__img"><img :src="dataUrl" /></div>
+    <div class="feature-people__info">
+      <h2 class="feature-people__title">{{ person.name }}</h2>
+      <ul class="feature-people__list">
         <li class="feature-info__list">Gender: {{ person.gender }}</li>
         <li class="feature-info__list">Birth year: {{ person.birth_year }}</li>
         <li class="feature-info__list">Eye color: {{ person.eye_color }}</li>
@@ -60,7 +60,7 @@ export default {
 </script>
 
 <style lang="scss">
-.feature {
+.feature-people {
   cursor: pointer;
   display: flex;
   width: 45%;

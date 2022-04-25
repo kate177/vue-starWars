@@ -32,53 +32,64 @@ export default {
     };
   },
   props: {
-    planet: "",
+    planet: String,
   },
-  created() {
-    this.fetchData();
-    this.truncate();
+  async created() {
+    try {
+      this.imagePlanets = await getImgService().getPlanetImgById(1);
+    } catch {
+      this.imagePlanets = img;
+    }
+    try {
+      const response = await planetsService().getPlanets();
+      this.planetShow = response.results[0];
+    } catch {
+      this.planetShow = {
+        name: "Planet not found",
+        population: "-",
+        rotation_period: "-",
+        diameter: "-",
+      };
+    }
     this.interval = setInterval(() => {
       this.rondomPlanet();
     }, 9000);
   },
   methods: {
-    async fetchData() {
-      const response = await planetsService().getPlanets();
-      this.planetShow = response.results[0];
-    },
-    async truncate() {
-      try {
-        this.imagePlanets = await getImgService().getPlanetImgById(1);
-      } catch {
-        this.imagePlanets = img;
-      }
-    },
     async rondomPlanet() {
+      const response = await planetsService().getPlanets();
+      this.id =
+        this.id <= 9 ? (this.id += 1) : this.id == 10 ? (this.id = 1) : "Error";
       try {
-        this.id += 1;
         if (this.id < 11) {
-          const response = await planetsService().getPlanets();
           this.imagePlanets = await getImgService().getPlanetImgById(this.id);
           this.planetShow = response.results[this.id - 1];
         }
       } catch {
         this.imagePlanets = img;
+        this.planetShow = response.results[this.id - 1];
       }
     },
   },
   watch: {
     planet: async function () {
+      clearTimeout(this.interval);
+      this.id = parseInt(this.planet.match(/\d+/));
+      const response = await planetsService().getPlanets();
       try {
-        clearTimeout(this.interval);
-        let idxImg = parseInt(this.planet.match(/\d+/));
-        this.imagePlanets = await getImgService().getPlanetImgById(idxImg);
-        const response = await planetsService().getPlanets();
-        this.planetShow = response.results[idxImg - 1];
+        this.imagePlanets = await getImgService().getPlanetImgById(this.id);
+        this.planetShow = response.results[this.id - 1];
       } catch {
         this.imagePlanets = img;
-        let idxImg = parseInt(this.planet.match(/\d+/));
-        const response = await planetsService().getPlanets();
-        this.planetShow = response.results[idxImg - 1];
+        this.planetShow =
+          idxImg < 10
+            ? response.results[this.id - 1]
+            : {
+                name: "Planet not found",
+                population: "-",
+                rotation_period: "-",
+                diameter: "-",
+              };
       }
     },
   },

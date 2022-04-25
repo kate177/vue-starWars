@@ -1,9 +1,9 @@
 <template>
-  <div class="fullInformation" v-if="starshipsInfo">
-    <div class="fullInformation__img"><img :src="dataUrl" /></div>
-    <div class="fullInformation__info">
-      <h2 class="fullInformation__title">{{ starshipsInfo.name }}</h2>
-      <ul class="fullInformation__list">
+  <div class="fullInformation-starship" v-if="starshipsInfo">
+    <div class="fullInformation-starship__img"><img :src="dataUrl" /></div>
+    <div class="fullInformation-starship__info">
+      <h2 class="fullInformation-starship__title">{{ starshipsInfo.name }}</h2>
+      <ul class="fullInformation-starship__list">
         <li class="fullInformation-info__list">
           Model:{{ starshipsInfo.model }}
         </li>
@@ -81,7 +81,7 @@ export default {
 </script>
 
 <style lang="scss">
-.fullInformation {
+.fullInformation-starship {
   margin-top: 40px;
   display: flex;
   width: 100%;

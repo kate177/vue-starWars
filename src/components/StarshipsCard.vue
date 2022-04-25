@@ -1,14 +1,14 @@
 <template>
   <div
-    class="feature"
+    class="feature-starships"
     @click="$router.push({ name: 'starshipsInfo', params: { id: id } })"
   >
-    <div class="feature__img">
+    <div class="feature-starships__img">
       <img :src="dataUrl" />
     </div>
-    <div class="feature__info">
-      <h2 class="feature__title">{{ starship.name }}</h2>
-      <ul class="feature__list">
+    <div class="feature-starships__info">
+      <h2 class="feature-starships__title">{{ starship.name }}</h2>
+      <ul class="feature-starships__list">
         <li class="feature-info__list">Model:{{ starship.model }}</li>
         <li class="feature-info__list">
           Manufacturer:{{ starship.manufacturer }}
@@ -67,7 +67,7 @@ export default {
 </script>
 
 <style lang="scss">
-.feature {
+.feature-starships {
   cursor: pointer;
   display: flex;
   width: 45%;
@@ -77,7 +77,7 @@ export default {
   background-color: var(--dynamic-background-color);
   &__img {
     width: 220px;
-    height: 200px;
+    height: 220px;
     border-radius: 10px;
     margin-right: 30px;
   }
@@ -106,12 +106,12 @@ export default {
   }
 }
 @media screen and (max-width: 1200px) {
-  .feature {
+  .feature-starships {
     width: 50%;
   }
 }
 @media screen and (max-width: 990px) {
-  .feature {
+  .feature-starships {
     flex-direction: column;
     &__img {
       margin: 0 auto;
@@ -122,22 +122,22 @@ export default {
   }
 }
 @media screen and (max-width: 576px) {
-  .feature__img {
+  .feature-starships__img {
     width: 160px;
     height: 220px;
   }
-  .feature__info {
+  .feature-starships__info {
     width: 160px;
   }
-  .feature__title {
+  .feature-starships__title {
     font-size: 22px;
   }
-  .feature__list li {
+  .feature-starships__list li {
     width: 160px;
   }
 }
 @media screen and (max-width: 413px) {
-  .feature {
+  .feature-starships {
     width: 100%;
     &__img {
       width: 140px;

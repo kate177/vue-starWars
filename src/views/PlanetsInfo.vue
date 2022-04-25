@@ -1,9 +1,9 @@
 <template>
-  <div class="fullInformation" v-if="planetInfo">
-    <div class="fullInformation__img"><img :src="dataUrl" /></div>
-    <div class="fullInformation__info">
-      <h2 class="fullInformation__title">{{ planetInfo.name }}</h2>
-      <ul class="fullInformation__list">
+  <div class="fullInformation-planet" v-if="planetInfo">
+    <div class="fullInformation-planet__img"><img :src="dataUrl" /></div>
+    <div class="fullInformation-planet__info">
+      <h2 class="fullInformation-planet__title">{{ planetInfo.name }}</h2>
+      <ul class="fullInformation-planet__list">
         <li class="fullInformation-info__list">
           Diametr: {{ planetInfo.diameter }}
         </li>
@@ -69,7 +69,7 @@ export default {
 </script>
 
 <style lang="scss">
-.fullInformation {
+.fullInformation-planet {
   margin-top: 40px;
   display: flex;
   width: 100%;

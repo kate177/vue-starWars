@@ -39,7 +39,7 @@
 export default {
   data() {
     return {
-      displayPlanet: true,
+      displayPlanet: 1,
     };
   },
 };

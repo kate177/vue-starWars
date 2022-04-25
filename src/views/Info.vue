@@ -1,9 +1,9 @@
 <template>
-  <div class="fullInformation" v-if="personInfo">
-    <div class="fullInformation__img"><img :src="dataUrl" /></div>
-    <div class="fullInformation__info">
-      <h2 class="fullInformation__title">{{ personInfo.name }}</h2>
-      <ul class="fullInformation__list">
+  <div class="fullInformation-people" v-if="personInfo">
+    <div class="fullInformation-people__img"><img :src="dataUrl" /></div>
+    <div class="fullInformation-people__info">
+      <h2 class="fullInformation-people__title">{{ personInfo.name }}</h2>
+      <ul class="fullInformation-people__list">
         <li class="fullInformation__list">Height: {{ personInfo.height }}</li>
         <li class="fullInformation__list">Mass: {{ personInfo.mass }}</li>
         <li class="fullInformation__list">
@@ -62,7 +62,7 @@ export default {
 </script>
 
 <style lang="scss">
-.fullInformation {
+.fullInformation-people {
   margin-top: 40px;
   display: flex;
   width: 100%;
@@ -71,8 +71,8 @@ export default {
   border-radius: 5px;
   background-color: var(--dynamic-background-color);
   &__img {
-    width: 240px;
-    height: 250px;
+    width: 230px;
+    height: 290px;
     border-radius: 10px;
     margin-right: 50px;
   }

@@ -1,12 +1,12 @@
 <template>
   <div
-    class="feature"
+    class="feature-planet"
     @click="$router.push({ name: 'planetsInfo', params: { id: id } })"
   >
-    <div class="feature__img"><img :src="dataUrl" /></div>
-    <div class="feature__info">
-      <h2 class="feature__title">{{ sphere.name }}</h2>
-      <ul class="feature__list">
+    <div class="feature-planet__img"><img :src="dataUrl" /></div>
+    <div class="feature-planet__info">
+      <h2 class="feature-planet__title">{{ sphere.name }}</h2>
+      <ul class="feature-planet__list">
         <li class="feature-info__list">Diametr: {{ sphere.diameter }}</li>
         <li class="feature-info__list">Population: {{ sphere.population }}</li>
         <li class="feature-info__list">
@@ -61,7 +61,7 @@ export default {
 </script>
 
 <style lang="scss">
-.feature {
+.feature-planet {
   cursor: pointer;
   display: flex;
   width: 45%;
@@ -70,7 +70,7 @@ export default {
   border-radius: 5px;
   background-color: var(--dynamic-background-color);
   &__img {
-    width: 180px;
+    width: 200px;
     height: 210px;
     border-radius: 10px;
     margin-right: 30px;

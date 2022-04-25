@@ -29,12 +29,16 @@ export default {
   data() {
     return {
       planet: null,
-      displayPlanet: false,
+      displayPlanet: 0,
     };
   },
+  watch: {
+    displayPlanet: function () {
+      sessionStorage.setItem("switch", this.displayPlanet);
+    },
+  },
   mounted() {
-    localStorage.setItem("switch", this.displayPlanet);
-    this.displayPlanet = localStorage.getItem("switch");
+    this.displayPlanet = Boolean(Number(sessionStorage.getItem("switch")));
   },
 };
 </script>
