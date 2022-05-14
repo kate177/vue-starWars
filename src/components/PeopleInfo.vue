@@ -97,12 +97,12 @@ export default {
   }
 }
 @media screen and (max-width: 1200px) {
-  .feature {
+  .feature-people {
     width: 50%;
   }
 }
 @media screen and (max-width: 990px) {
-  .feature {
+  .feature-people {
     flex-direction: column;
     &__img {
       margin: 0 auto;
@@ -110,22 +110,22 @@ export default {
   }
 }
 @media screen and (max-width: 576px) {
-  .feature__img {
+  .feature-people__img {
     width: 160px;
     height: 220px;
   }
-  .feature__info {
+  .feature-people__info {
     width: 160px;
   }
-  .feature__title {
+  .feature-people__title {
     font-size: 22px;
   }
-  .feature__list li {
+  .feature-people__list li {
     width: 160px;
   }
 }
 @media screen and (max-width: 413px) {
-  .feature {
+  .feature-people {
     width: 100%;
     &__img {
       width: 140px;
@@ -134,8 +134,6 @@ export default {
     &__info {
       margin: 0 auto;
       margin-top: 20px;
-    }
-    .feature__info {
       width: 100%;
     }
     &__title {
